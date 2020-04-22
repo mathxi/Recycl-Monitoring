@@ -10,14 +10,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Monitoring.Controllers;
 
 namespace Monitoring
 {
     public class Startup
     {
+        readonly string crossOriginPolicy = "_baseCros";
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            AccessConfiguration.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -25,6 +28,14 @@ namespace Monitoring
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(crossOriginPolicy,
+                builder =>
+                {
+                    builder.WithOrigins().AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            });
             services.AddControllers();
         }
 
@@ -35,6 +46,7 @@ namespace Monitoring
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(crossOriginPolicy);
 
             app.UseHttpsRedirection();
 
