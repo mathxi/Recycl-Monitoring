@@ -30,7 +30,7 @@ namespace Monitoring.Controllers
 
         // GET api/<controller>/18/05/18
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        [HttpGet("{date}")]
+        [HttpGet]
         [Route("api/[controller]/getbydate")]
         public string Get(DateTime date)
         {
@@ -39,7 +39,7 @@ namespace Monitoring.Controllers
 
         // POST api/<controller>
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        [HttpGet("{date}")]
+        [HttpGet]
         [Route("api/[controller]/getafterdate")]
         public string getafterdate(DateTime date ,int page)
         {
@@ -48,7 +48,7 @@ namespace Monitoring.Controllers
 
         // POST api/<controller>
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        [HttpGet("{idDemande}")]
+        [HttpGet]
         [Route("api/[controller]/getdechetdemande")]
         public string getdechetdemande(int idDemande)
         {
