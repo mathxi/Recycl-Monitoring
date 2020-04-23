@@ -6,59 +6,43 @@ using System.Threading.Tasks;
 using System.Web.Http.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Monitoring.Model;
+using Monitoring.Model.Request;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Oracle.ManagedDataAccess.Client;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Monitoring.Controllers
 {
+
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     [Route("api/[controller]")]
     public class DechetController : Controller
     {
         // GET: api/<controller>
         [HttpGet]
-        public ActionResult<IEnumerable<Person>> Get()
+        public ActionResult<string> Get()
         {
-
-
-
-            ConnectionDatabase co = new ConnectionDatabase();
-
-
-            if (co.OpenConnection() == true)
-            {
-                string command = "select * from db.camion;";
-                //Create Command
-                OracleCommand cmd = new OracleCommand(command, co.GetConnection());
-
-                OracleDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    Console.WriteLine(reader.GetValue(0));
-                }
-                reader.Dispose();
-                cmd.Dispose();
-                co.CloseConnection();
-            }
-            Person person = new Person { Name = "Ana" ,Surname ="Maréchaall"};
-            Person person2 = new Person { Name = "Ananeu", Surname = "Maréchaalleuuuu" };
-            List<Person> persons = new List<Person> { person, person2};
-            return persons;
+            return "[]";
         }
 
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // GET api/<controller>/18/05/18
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [HttpGet("{date}")]
+        [Route("api/[controller]/getbydate")]
+        public string Get(DateTime date)
         {
-            return "value";
+            return "[]";
         }
 
         // POST api/<controller>
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [HttpPost]
-        public void Post([FromBody]string value)
+        [Route("api/[controller]/getafterdate")]
+        public static ActionResult<string> Post([FromBody] DateTime date ,int page)
         {
+            return RequestDemande.demandeApresDate(date, page);
         }
 
         // PUT api/<controller>/5
@@ -72,10 +56,5 @@ namespace Monitoring.Controllers
         public void Delete(int id)
         {
         }
-    }
-    public class Person
-    {
-        public string Name { get; set; }
-        public string Surname { get; set; }
     }
 }
