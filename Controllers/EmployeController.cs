@@ -12,8 +12,8 @@ namespace Monitoring.Controllers
         // GET: api/Employe
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("api/[controller]/getemployentournee")]
-        [HttpPost]
-        public string Get( [FromForm] int nbTournee)
+        [HttpGet("{nbtournee}")]
+        public string Get(int nbTournee)
         {
             return RequestEmploye.employeavecmoinsdentournee(nbTournee);
         }
