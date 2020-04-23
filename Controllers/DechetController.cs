@@ -39,18 +39,18 @@ namespace Monitoring.Controllers
 
         // POST api/<controller>
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        [HttpPost]
+        [HttpGet]
         [Route("api/[controller]/getafterdate")]
-        public string getafterdate([FromForm] DateTime date, int page)
+        public string getafterdate(string date, int page)
         {
             return RequestDemande.demandeApresDate(date, page);
         }
 
         // POST api/<controller>
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        [HttpPost]
+        [HttpGet]
         [Route("api/[controller]/getdechetdemande")]
-        public string getdechetdemande([FromForm] int idDemande)
+        public string getdechetdemande(int idDemande)
         {
             return RequestDemande.NombreDechetPourUneDemande(idDemande);
         }

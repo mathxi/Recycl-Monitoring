@@ -8,18 +8,18 @@ namespace Monitoring.Model.Request
 {
     public static class RequestDemande
     {
-            public static string demandeApresDate(DateTime date, int page)
+            public static string demandeApresDate(string afterdate, int toindex)
             {
                 ConnectionDatabase co = new ConnectionDatabase();
 
 
                 if (co.OpenConnection() == true)
                 {
-                    string command = "SELECT * FROM db.demande WHERE datedemande > :date order by datedemande OFFSET :page ROWS FETCH NEXT 10 ROWS ONLY";
+                    string command = "SELECT * FROM db.demande WHERE datedemande > :afterdate order by datedemande OFFSET :toindex ROWS FETCH NEXT 3 ROWS ONLY";
                     //Create Command
                     OracleCommand cmd = new OracleCommand(command, co.GetConnection());
-                    cmd.Parameters.Add("date", date);
-                    cmd.Parameters.Add("page", page);
+                    cmd.Parameters.Add("date", afterdate);
+                    cmd.Parameters.Add("page", toindex);
                     OracleDataReader reader = cmd.ExecuteReader();
                     /*
                     while (reader.Read())
