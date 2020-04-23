@@ -25,7 +25,7 @@ namespace Monitoring.Model
                     jsonWriter.WriteStartObject();
 
                     int fields = reader.FieldCount;
-                    var value = reader[3];
+                    //var value = reader[3];
                     for (int i = 0; i < fields; i++)
                     {
                         jsonWriter.WritePropertyName(reader.GetName(i));

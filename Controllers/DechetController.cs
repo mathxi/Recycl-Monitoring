@@ -39,21 +39,41 @@ namespace Monitoring.Controllers
 
         // POST api/<controller>
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        [HttpPost]
+        [HttpGet("{date}")]
         [Route("api/[controller]/getafterdate")]
-        public string getafterdate([FromForm] DateTime date, int page)
+        public string getafterdate(DateTime date ,int page)
         {
             return RequestDemande.demandeApresDate(date, page);
         }
 
         // POST api/<controller>
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        [HttpPost]
+        [HttpGet("{idDemande}")]
         [Route("api/[controller]/getdechetdemande")]
-        public string getdechetdemande([FromForm] int idDemande)
+        public string getdechetdemande(int idDemande)
         {
             return RequestDemande.NombreDechetPourUneDemande(idDemande);
         }
+
+        // POST api/<controller>
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [HttpGet]
+        [Route("api/[controller]/getdechetcentreperiode")]
+        public string getDechetPourUnCentrePourUnePeriode(string datedebut,string datefin, int centre, int typedechet)
+        {
+            return RequestDechet.QuantiteDechetPourUnCentrePourUnePeriode(datedebut, datefin, centre, typedechet);
+        }
+
+        // POST api/<controller>
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [HttpGet]
+        [Route("api/[controller]/getdechetpourperiode")]
+        public string getdechetpourperiode(string datedebut, string datefin)
+        {
+            return RequestDechet.QuantiteDechetPourMoisAnnee(datedebut, datefin);
+        }
+
+
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]

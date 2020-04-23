@@ -55,6 +55,28 @@ namespace Monitoring.Model.Request
             }
             return "[]";
         }
+
+        public static string DemandePasDansTournee()
+        {
+            ConnectionDatabase co = new ConnectionDatabase();
+
+            if (co.OpenConnection() == true)
+            {
+                string command = @"select *
+from db.demande
+where notournee is null";
+                OracleCommand cmd = new OracleCommand(command, co.GetConnection());
+                OracleDataReader reader = cmd.ExecuteReader();
+
+                string json = RequestToJson.ToJson(reader);
+                reader.Dispose();
+                cmd.Dispose();
+                co.CloseConnection();
+                return json;
+
+            }
+            return "[]";
+        }
     }
     
 }
