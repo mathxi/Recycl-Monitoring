@@ -12,7 +12,7 @@ namespace Monitoring.Controllers
         // GET: api/Employe
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("api/[controller]/getemployentournee")]
-        [HttpGet("{nbtournee}")]
+        [HttpGet]
         public string Get(int nbTournee)
         {
             return RequestEmploye.employeavecmoinsdentournee(nbTournee);

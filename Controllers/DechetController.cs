@@ -19,24 +19,6 @@ namespace Monitoring.Controllers
 
     public class DechetController : Controller
     {
-        // GET: api/<controller>
-        [EnableCors(origins: "*", headers: "*", methods: "*")]
-        [Route("api/[controller]")]
-        [HttpGet]
-        public ActionResult<string> Get()
-        {
-            return "[]";
-        }
-
-        // GET api/<controller>/18/05/18
-        [EnableCors(origins: "*", headers: "*", methods: "*")]
-        [HttpGet]
-        [Route("api/[controller]/getbydate")]
-        public string Get(DateTime date)
-        {
-            return "[]";
-        }
-
         // POST api/<controller>
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [HttpGet]
@@ -71,20 +53,6 @@ namespace Monitoring.Controllers
         public string getdechetpourperiode(string datedebut, string datefin)
         {
             return RequestDechet.QuantiteDechetPourMoisAnnee(datedebut, datefin);
-        }
-
-
-
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
