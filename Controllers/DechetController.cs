@@ -16,11 +16,12 @@ using Oracle.ManagedDataAccess.Client;
 namespace Monitoring.Controllers
 {
 
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
-    [Route("api/[controller]")]
+
     public class DechetController : Controller
     {
         // GET: api/<controller>
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [Route("api/[controller]")]
         [HttpGet]
         public ActionResult<string> Get()
         {
@@ -40,9 +41,18 @@ namespace Monitoring.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [HttpPost]
         [Route("api/[controller]/getafterdate")]
-        public static ActionResult<string> Post([FromBody] DateTime date ,int page)
+        public string getafterdate([FromForm] DateTime date, int page)
         {
             return RequestDemande.demandeApresDate(date, page);
+        }
+
+        // POST api/<controller>
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [HttpPost]
+        [Route("api/[controller]/getdechetdemande")]
+        public string getdechetdemande([FromForm] int idDemande)
+        {
+            return RequestDemande.NombreDechetPourUneDemande(idDemande);
         }
 
         // PUT api/<controller>/5
